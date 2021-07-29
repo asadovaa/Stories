@@ -277,7 +277,7 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
         if scrollview.subviews.count > 0 {
             if story?.isCompletelyVisible == true {
                 videoView.startAnimating()
-                IGVideoCacheManager.shared.getFile(for: url) { (result) in
+                IGVideoCacheManager.shared.getFile(for: url.appending(".mp4")) { (result) in
                     switch result {
                         case .success(let url):
                             let videoResource = VideoResource(filePath: url.absoluteString.appending(".mp4"))
