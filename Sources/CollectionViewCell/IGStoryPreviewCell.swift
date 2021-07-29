@@ -280,7 +280,7 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
                 IGVideoCacheManager.shared.getFile(for: url) { (result) in
                     switch result {
                         case .success(let url):
-                            let videoResource = VideoResource(filePath: url.absoluteString)
+                            let videoResource = VideoResource(filePath: url.absoluteString.appending(".mp4"))
                             videoView.play(with: videoResource, withHeaders: self.headers)
                         case .failure(let error):
                             videoView.stopAnimating()
