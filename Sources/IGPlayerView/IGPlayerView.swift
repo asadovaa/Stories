@@ -180,7 +180,8 @@ extension IGPlayerView: PlayerControls {
     
     func play(with resource: VideoResource, withHeaders headers: [String: String] = [:]) {
         
-        guard let url = URL(string: resource.filePath) else {fatalError("Unable to form URL from resource")}
+//        guard let url = URL(string: resource.filePath) else {fatalError("Unable to form URL from resource")}
+        let url = URL(fileURLWithPath: resource.filePath, isDirectory: true)
         if let existingPlayer = player {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
@@ -202,7 +203,7 @@ extension IGPlayerView: PlayerControls {
         player?.play()
     }
     func play() {
-        //We have used this for long press gesture
+        //We have used this for long press gestureb
         if let existingPlayer = player {
             existingPlayer.play()
         }
