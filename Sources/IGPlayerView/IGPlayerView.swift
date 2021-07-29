@@ -188,8 +188,7 @@ extension IGPlayerView: PlayerControls {
             }
         } else {
             let mimeType = "video/mp4"
-            let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers,
-                                                       "AVURLAssetOutOfBandMIMETypeKey": mimeType])
+            let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
             playerItem = AVPlayerItem(asset: asset)
             player = AVPlayer(playerItem: playerItem)
             playerLayer = AVPlayerLayer(player: player)
