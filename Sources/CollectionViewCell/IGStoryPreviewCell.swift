@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import EasyPeasy
 
 protocol StoryPreviewProtocol: class {
     func didCompletePreview()
@@ -209,19 +210,12 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
         scrollview.subviews.filter({$0.tag == snapIndex + snapViewTagIndicator}).first?.removeFromSuperview()
         
         scrollview.addSubview(snapView)
-        
+
+        snapView.easy.layout(Leading().to(scrollview, .leading).when { self.snapIndex == 0 }, Leading().to(scrollview.subviews[previousSnapIndex], .trailing).when { self.snapIndex == 0 }, Top().to(scrollview, .top), Width().like(scrollview), Height().like(scrollview))
+        scrollview.easy.layout(Bottom().to(snapView, .bottom))
         /// Setting constraints for snap view.
-        NSLayoutConstraint.activate([
-            snapView.leadingAnchor.constraint(equalTo: (snapIndex == 0) ? scrollview.leadingAnchor : scrollview.subviews[previousSnapIndex].trailingAnchor),
-            snapView.igTopAnchor.constraint(equalTo: scrollview.igTopAnchor),
-            snapView.widthAnchor.constraint(equalTo: scrollview.widthAnchor),
-            snapView.heightAnchor.constraint(equalTo: scrollview.heightAnchor),
-            scrollview.igBottomAnchor.constraint(equalTo: snapView.igBottomAnchor)
-        ])
         if(snapIndex != 0) {
-            NSLayoutConstraint.activate([
-                snapView.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor, constant: CGFloat(snapIndex)*scrollview.width)
-            ])
+            snapView.easy.layout(Leading(CGFloat(snapIndex) * scrollview.width).to(scrollview, .leading))
         }
         return snapView
     }

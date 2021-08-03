@@ -33,7 +33,7 @@ class IGStoryPreviewView: UIView {
         return flowLayout
     }()
     lazy var snapsCollectionView: UICollectionView! = {
-        let cv = UICollectionView.init(frame: CGRect(x: 0,y: 0,width: UIScreen.main.bounds.width,height:  UIScreen.main.bounds.height), collectionViewLayout: snapsCollectionViewFlowLayout)
+        let cv = UICollectionView.init(frame: .zero, collectionViewLayout: snapsCollectionViewFlowLayout)
         cv.backgroundColor = .black
         cv.showsVerticalScrollIndicator = false
         cv.showsHorizontalScrollIndicator = false
