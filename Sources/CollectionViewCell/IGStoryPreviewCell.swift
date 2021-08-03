@@ -70,6 +70,17 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
+
+    public let button: UIButton = {
+        let button = UIButton()
+        button.setTitle("Şifariş et", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        return button
+    }()
+
     public var getSnapIndex: Int {
         return snapIndex
     }
@@ -156,6 +167,7 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
         scrollview.backgroundColor = .black
         contentView.addSubview(scrollview)
         contentView.addSubview(storyHeaderView)
+        contentView.addSubview(button)
         scrollview.addGestureRecognizer(longPress_gesture)
         scrollview.addGestureRecognizer(tap_gesture)
     }
@@ -174,6 +186,13 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
             contentView.igRightAnchor.constraint(equalTo: storyHeaderView.igRightAnchor),
             storyHeaderView.igTopAnchor.constraint(equalTo: contentView.igTopAnchor),
             storyHeaderView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+
+        NSLayoutConstraint.activate([
+            button.igLeftAnchor.constraint(equalTo: contentView.igLeftAnchor, constant: 24),
+            button.igRightAnchor.constraint(equalTo: contentView.igRightAnchor, constant: -24),
+            storyHeaderView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            storyHeaderView.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
     private func createSnapView() -> UIImageView {
